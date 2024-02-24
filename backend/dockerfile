@@ -9,5 +9,6 @@ WORKDIR /app
 RUN adduser -D user
 USER user
 ARG PORT=8080
+ENV PORT=${PORT}
 EXPOSE ${PORT}
 CMD python -m uvicorn app:app --host 0.0.0.0 --port ${PORT}
