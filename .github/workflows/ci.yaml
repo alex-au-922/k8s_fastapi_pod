@@ -98,7 +98,7 @@ jobs:
       - name: upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./htmlcov/
+          path: ${{env.WORKDIR}}/htmlcov
       - name: deploy to Github Pages
         uses: actions/deploy-pages@v2
         id: deployment
@@ -108,13 +108,13 @@ jobs:
         uses: tj-actions/verify-changed-files@v17
         id: verify-changed-files
         with:
-          files: coverage.svg
+          files: ${{env.WORKDIR}}/coverage.svg
       - name: Commit files
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add coverage.svg
+          git add ${{env.WORKDIR}}/coverage.svg
           git commit -m "Updated coverage.svg"
       - name: Push changes
         if: steps.verify-changed-files.outputs.files_changed == 'true'
