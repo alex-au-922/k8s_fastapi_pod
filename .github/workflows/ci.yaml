@@ -87,7 +87,7 @@ jobs:
             ${{ runner.os }}-coverage-producer-
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: '3.11' # python 3.12 is not supported by coverage-badge-py
       - name: Install dependencies
         run: pip install coverage
       - name: Generate coverage report
